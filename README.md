@@ -1,8 +1,8 @@
-# 🎬 Movie API
+# 🎬 CineVault API
 
-Welcome to **Movie API**, a backend application built to manage a movie catalog. This API allows you to register, list, retrieve, and delete movie records in a simple and efficient way.
+Welcome to **CineVault API**, a backend application built to manage a movie catalog. This API allows you to register, list, retrieve, and delete movie records in a simple and efficient way.
 
-The project was made for learning about backend development and good development practices. It serves as a foundation for RESTful applications and can be easily expanded or integrated into other platforms.
+The project was made for learning about backend development with Express and Prisma.
 
 ## 🚀 Features
 
