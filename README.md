@@ -4,6 +4,8 @@ Welcome to **CineVault API**, a backend application built to manage a movie cata
 
 The project was made for learning about backend development with Express and Prisma.
 
+It now includes a Valkey cache layer using the cache-aside pattern for movie reads.
+
 ## 🚀 Features
 
 - 📋 List all movies
@@ -21,6 +23,7 @@ Interactive API documentation is available via Swagger, making it easy to explor
 
 - [Node.js](https://nodejs.org/)
 - [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
 ### Setup
 
@@ -51,6 +54,8 @@ cp .env.example .env
 docker compose up -d
 ```
 
+This command starts both Postgres and Valkey.
+
 **5. Generate the Prisma client**
 
 ```bash
@@ -72,3 +77,15 @@ npm run start
 The API will be available at `http://localhost:3000`.
 
 The interactive Swagger documentation will be available at `http://localhost:3000/api-docs`.
+
+## Cache Behavior
+
+- `GET /api/movies` and `GET /api/movies/:id` first try Valkey.
+- Cache miss falls back to Postgres and then stores the result in Valkey.
+- `POST /api/movies` and `DELETE /api/movies/:id` invalidate related cache keys.
+
+### Cache Environment Variables
+
+- `VALKEY_URL` default: `redis://localhost:6379`
+- `CACHE_ENABLED` default: `true`
+- `CACHE_TTL_SECONDS` default: `60`
